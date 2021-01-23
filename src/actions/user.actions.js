@@ -1,6 +1,8 @@
 import { userConstants } from "./constants";
 import { firestore } from "firebase";
 
+import { clearLoader, isLoading } from "./loadingAction";
+
 export const getRealtimeUsers = (uid) => {
   //console.log('uid', uid)
 
@@ -56,6 +58,7 @@ export const updateMessage = (msgObj) => {
 export const getRealtimeConversations = (user) => {
   console.log("object");
   return async (dispatch) => {
+    // dispatch(isLoading());
     const db = firestore();
     db.collection("conversations")
       .where("user_uid_1", "in", [user.uid_1, user.uid_2])
@@ -87,7 +90,7 @@ export const getRealtimeConversations = (user) => {
           type: userConstants.GET_REALTIME_MESSAGES,
           payload: { conversations },
         });
-
+        // dispatch(clearLoader());
         console.log(conversations);
       });
     //user_uid_1 == 'myid' and user_uid_2 = 'yourId' OR user_uid_1 = 'yourId' and user_uid_2 = 'myId'

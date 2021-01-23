@@ -115,7 +115,7 @@ const HomePage = (props) => {
                       textAlign: con.user_uid_1 == auth.uid ? "right" : "left",
                     }}
                   >
-                    <p className="messageStyle">{con.message}hello</p>
+                    <p className="messageStyle">{con.message}</p>
                   </div>
                 ))
               : null}

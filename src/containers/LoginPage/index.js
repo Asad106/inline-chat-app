@@ -22,10 +22,8 @@ const LoginPage = (props) => {
   //     dispatch(isLoggedInUser())
   //   }
   // }, []);
-
   const userLogin = (e) => {
     e.preventDefault();
-
     if (email == "") {
       alert("Email is required");
       return;
