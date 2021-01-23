@@ -1,94 +1,123 @@
-import React, { useState } from 'react';
-import Layout from '../../components/Layout';
-import Card from '../../components/UI/Card';
-import { signup } from '../../actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import React, { useState } from "react";
+import Layout from "../../components/Layout";
+import Card from "../../components/UI/Card";
+import { signup } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 /**
-* @author
-* @function RegisterPage
-**/
+ * @author
+ * @function RegisterPage
+ **/
 
 const RegisterPage = (props) => {
-
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth);
-
+  const auth = useSelector((state) => state.auth);
 
   const registerUser = (e) => {
-    
     e.preventDefault();
 
     const user = {
-      firstName, lastName, email, password
-    }
-    
-    dispatch(signup(user))
+      firstName,
+      lastName,
+      email,
+      password,
+    };
+
+    dispatch(signup(user));
+  };
+
+  if (auth.authenticated) {
+    return <Redirect to={`/`} />;
   }
 
-
-  if(auth.authenticated){
-    return <Redirect to={`/`} />
-  }
-
-  return(
+  return (
     <Layout>
       <div className="registerContainer">
         <Card>
           <form onSubmit={registerUser}>
+            <h3 style={{ textAlign: "center", color: "#fff", paddingTop: 10 }}>
+              Sign up
+            </h3>
+            <div style={{ textAlign: "center", marginTop: 30 }}>
+              <input
+                name="firstName"
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="First Name"
+                style={{
+                  width: "80%",
+                  margin: "auto",
+                  height: 30,
+                  marginTop: 7,
+                }}
+              />
 
-            <h3>Sign up</h3>
+              <input
+                name="lastName"
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="Last Name"
+                style={{
+                  width: "80%",
+                  margin: "auto",
+                  height: 30,
+                  marginTop: 7,
+                }}
+              />
 
-          <input 
-              name="firstName"
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="First Name"
-            />
+              <input
+                name="email"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                style={{
+                  width: "80%",
+                  margin: "auto",
+                  height: 30,
+                  marginTop: 7,
+                }}
+              />
 
-            <input 
-              name="lastName"
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Last Name"
-            />
-
-            <input 
-              name="email"
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-            />
-
-            <input 
-              name="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-            />
-
-            <div>
-              <button>Sign up</button>
+              <input
+                name="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                style={{
+                  width: "80%",
+                  margin: "auto",
+                  height: 30,
+                  marginTop: 7,
+                }}
+              />
             </div>
 
-
-
+            <div style={{ textAlign: "center" }}>
+              <button
+                style={{
+                  width: 200,
+                  marginTop: 30,
+                  marginBottom: 20,
+                  height: 30,
+                }}
+              >
+                Sign up
+              </button>
+            </div>
           </form>
         </Card>
       </div>
     </Layout>
-   )
+  );
+};
 
- }
-
-export default RegisterPage
+export default RegisterPage;

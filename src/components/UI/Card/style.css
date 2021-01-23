@@ -1,6 +1,9 @@
-.card{
-    width: 100%;
-    border: 1px solid #eee;
-    background: #fff;
-    box-shadow: 0 0 5px 1px #ccc;
+.card {
+  width: 100%;
+  border: 1px solid #eee;
+  background: rgb(223, 21, 21);
+  box-shadow: 0 0 5px 1px #ccc;
+  display: block;
+  justify-content: center;
+  align-items: center;
 }
